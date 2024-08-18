@@ -20,6 +20,7 @@
         <h2>{{ exercise.name }}</h2>
         <p>{{ exercise.description }}</p>
         <p>Duration: {{ exercise.duration }} minutes</p>
+        <p>{{ exercise.daysOfWeek}}</p>
       </ion-label>
       <ion-buttons slot="end">
         <ion-button (click)="openEditExerciseModal(exercise.id)">Edit</ion-button>
