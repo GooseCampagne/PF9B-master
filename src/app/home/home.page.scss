@@ -88,4 +88,10 @@
       font-size: 1.2rem;
     }
   }
+
+ion-buttons {
+  ion-button {
+    --color: #ffffff; // Color del ícono
+  }
+}
 }
