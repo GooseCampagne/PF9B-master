@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth'; // Importa desde 'compat'
+import { AngularFireAuth } from '@angular/fire/compat/auth'; 
 import { Observable } from 'rxjs';
-import firebase from 'firebase/compat/app'; // Importa desde 'compat'
+import firebase from 'firebase/compat/app'; 
 import { map } from 'rxjs/operators';
 
 @Injectable({

@@ -18,7 +18,7 @@ import { EditExerciseModalComponent } from './edit-exercise-modal/edit-exercise-
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig), // Agregado
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     ReactiveFormsModule, 
     FormsModule

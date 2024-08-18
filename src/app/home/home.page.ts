@@ -3,8 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { RoutineService } from '../services/routine.service';
 import { AuthService } from '../services/auth.service';
 import { RoutineModalPage } from '../routine-modal/routine-modal.page';
-import { Router } from '@angular/router'; // Importa Router aquí
-import { Timestamp } from 'firebase/firestore'; // Importar Timestamp correctamente
+import { Router } from '@angular/router'; 
+import { Timestamp } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 @Component({
@@ -15,13 +15,13 @@ import { of } from 'rxjs';
 export class HomePage implements OnInit {
   routines: any[] = [];
   user: any;
-  userPhoto$: Observable<string> = of(''); // Usa Observable<string> para la URL de la foto
+  userPhoto$: Observable<string> = of(''); 
 
   constructor(
     private modalController: ModalController,
     private routineService: RoutineService,
     private authService: AuthService,
-    private router: Router // Inyecta Router aquí
+    private router: Router 
   ) {}
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class HomePage implements OnInit {
       this.user = user;
       if (this.user) {
         this.loadRoutines();
-        this.userPhoto$ = this.authService.userPhotoURL; // Asigna el Observable de la URL de la foto
+        this.userPhoto$ = this.authService.userPhotoURL; 
       }
     });
   }
@@ -54,7 +54,7 @@ export class HomePage implements OnInit {
         } else if (typeof creationDate === 'object' && creationDate.hasOwnProperty('seconds')) {
           creationDate = new Date(creationDate.seconds * 1000);
         }
-        console.log('Routine loaded:', routine); // Verifica los datos aquí
+        console.log('Routine loaded:', routine); 
         return {
           ...routine,
           creationDate

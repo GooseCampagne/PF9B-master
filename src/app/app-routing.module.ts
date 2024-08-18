@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard'; // Importa el guard
+import { AuthGuard } from './guards/auth.guard'; 
 
 const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
-    canActivate: [AuthGuard] // Protege la ruta
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule),
-    canActivate: [AuthGuard] // Protege la ruta
+    canActivate: [AuthGuard] 
   },
   {
     path: '',
@@ -35,7 +35,7 @@ const routes: Routes = [
     loadChildren: () => import('./routine-modal/routine-modal.module').then(m => m.RoutineModalPageModule)
   },
   {
-    path: 'routine-details/:id', // Define la ruta con un parámetro 'id'
+    path: 'routine-details/:id', 
     loadChildren: () => import('./routine-details/routine-details.module').then(m => m.RoutineDetailsPageModule)
   }
 ];

@@ -17,7 +17,7 @@ export class ProfilePage implements OnInit {
   lastName: string = '';
   phoneNumber: string = '';
   profileImageUrl: string = '';
-  isEditing: boolean = false; // Estado de edición
+  isEditing: boolean = false; 
 
   constructor(
     private firestoreService: FirebaseFirestoreService,
@@ -25,7 +25,7 @@ export class ProfilePage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private location: Location,
-    private alertController: AlertController // Asegúrate de que esto esté importado
+    private alertController: AlertController 
   ) {}
 
   ngOnInit() {
@@ -43,7 +43,7 @@ export class ProfilePage implements OnInit {
       this.firebaseStorageService.uploadFile(input.files[0]).subscribe(
         url => {
           this.profileImageUrl = url;
-          this.reloadProfile(); // Recargar el perfil después de subir la imagen
+          this.reloadProfile(); 
         },
         error => {
           console.error('Error uploading file', error);
@@ -63,14 +63,14 @@ export class ProfilePage implements OnInit {
 
       const imageUrl = image.dataUrl;
       if (imageUrl) {
-        // Convertir Data URL a un archivo
+      
         const file = this.dataURLToFile(imageUrl, 'profile-image.jpg');
 
-        // Subir la imagen al almacenamiento de Firebase
+       
         this.firebaseStorageService.uploadFile(file).subscribe(
           url => {
             this.profileImageUrl = url;
-            this.reloadProfile(); // Recargar el perfil después de subir la foto
+            this.reloadProfile(); 
           },
           error => {
             console.error('Error uploading image', error);
@@ -82,7 +82,7 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  // Función para convertir Data URL a un archivo
+
   dataURLToFile(dataURL: string, filename: string): File {
     const [header, data] = dataURL.split(',');
     const mime = header.split(':')[1].split(';')[0];
@@ -102,8 +102,8 @@ export class ProfilePage implements OnInit {
       try {
         await this.firestoreService.saveUserProfile(this.firstName, this.lastName, this.phoneNumber);
         await this.showAlert('Success', 'Profile updated successfully');
-        this.isEditing = false; // Desactiva el modo de edición después de guardar
-        this.reloadProfile(); // Recargar el perfil
+        this.isEditing = false; 
+        this.reloadProfile(); 
       } catch (error) {
         console.error('Error updating profile', error);
         await this.showAlert('Error', 'Failed to update profile');
@@ -112,7 +112,7 @@ export class ProfilePage implements OnInit {
   }
 
   editProfile() {
-    this.isEditing = true; // Activa el modo de edición
+    this.isEditing = true;
   }
 
   async showAlert(header: string, message: string) {

@@ -9,8 +9,8 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./routine-modal.page.scss'],
 })
 export class RoutineModalPage {
-  @Input() userId: string = ''; // Inicializa con un valor predeterminado (vacío en este caso)
-  routine: any = { exercises: [] }; // Asegúrate de definir cómo es el objeto routine
+  @Input() userId: string = ''; 
+  routine: any = { exercises: [] }; 
 
   constructor(
     private modalController: ModalController,
@@ -21,12 +21,12 @@ export class RoutineModalPage {
   async saveRoutine() {
     if (this.validateRoutine()) {
       if (this.userId) {
-        this.routine.userId = this.userId; // Asegúrate de agregar userId al objeto routine
+        this.routine.userId = this.userId; 
         try {
           if (this.routine.id) {
-            await this.routineService.updateRoutine(this.routine); // Método para actualizar una rutina
+            await this.routineService.updateRoutine(this.routine); 
           } else {
-            await this.routineService.addRoutine(this.routine); // Método para añadir una nueva rutina
+            await this.routineService.addRoutine(this.routine); 
           }
           this.modalController.dismiss();
         } catch (error) {

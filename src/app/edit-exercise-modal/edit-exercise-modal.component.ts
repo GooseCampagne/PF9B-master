@@ -29,7 +29,7 @@ export class EditExerciseModalComponent {
   }
 
   private validateForm(): boolean {
-    // Validate if all fields are filled
+
     return this.updatedExercise.name &&
            this.updatedExercise.description &&
            this.updatedExercise.duration &&

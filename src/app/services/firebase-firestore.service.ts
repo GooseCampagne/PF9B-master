@@ -22,7 +22,7 @@ export class FirebaseFirestoreService {
     ).toPromise();
   }
 
-  // Obtiene la información del perfil del usuario desde Firestore
+  // Obtiene la información del perfil 
   getUserProfile(): Observable<any> {
     return this.afAuth.user.pipe(
       switchMap(user => {

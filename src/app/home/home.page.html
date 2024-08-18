@@ -13,14 +13,14 @@
   <div class="home-container">
     <ion-title class="goal-title">¿Cuál es tu meta?</ion-title>
 
-    <!-- Botón para crear una nueva rutina -->
+
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button (click)="openRoutineModal()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
 
-    <!-- Mostrar rutinas guardadas -->
+
     <ion-grid *ngIf="routines.length > 0">
       <ion-row>
         <ion-col size="12" *ngFor="let routine of routines">
@@ -37,7 +37,7 @@
       </ion-row>
     </ion-grid>
 
-    <!-- Mensaje si no hay rutinas -->
+
     <div *ngIf="routines.length === 0" class="no-routines">
       No tienes ninguna rutina creada. ¡Comienza agregando una!
     </div>

@@ -25,7 +25,7 @@ export class RoutineDetailsPage implements OnInit {
     private routineService: RoutineService,
     private modalController: ModalController,
     private location: Location,
-    private alertController: AlertController // Añadido AlertController
+    private alertController: AlertController 
   ) {}
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class RoutineDetailsPage implements OnInit {
         {
           text: 'Aceptar',
           handler: () => {
-            this.deleteRoutine(); // Elimina la rutina
+            this.deleteRoutine();
           }
         }
       ]
