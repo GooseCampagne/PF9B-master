@@ -1,55 +1,64 @@
 :host {
-    ion-content {
-      --background: #1e1e1e;
-    }
-  
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      padding: 16px;
-    }
-  
-    .register-box {
-      width: 100%;
-      max-width: 400px;
-      padding: 32px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      text-align: center;
-    }
-  
-    .register-title {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #ffffff;
-    }
-  
-    ion-input {
-      color: #ffffff;
-    }
-  
-    ion-button {
-      margin-top: 1rem;
-      width: 100%;
-      --background: #4caf50;
-    }
-  
-    .login-link {
-      margin-top: 1rem;
-      color: #4caf50;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  
-    .password-error {
-      color: #ff4d4d;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
+  ion-content {
+    --background: #1e1e1e; /* Fondo oscuro para ion-content */
   }
-  
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 16px;
+  }
+
+  .register-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 32px;
+    border-radius: 12px;
+    background: rgba(34, 34, 34, 0.8); /* Fondo oscuro con transparencia */
+    backdrop-filter: blur(10px);
+    text-align: center;
+    color: #ffffff; /* Texto blanco para contraste en fondo oscuro */
+  }
+
+  .register-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #e0e0e0; /* Gris claro para el título */
+  }
+
+  ion-item {
+    --background: #333333; /* Fondo oscuro para el contenedor del input */
+    --border-color: transparent; /* Elimina el borde por defecto */
+  }
+
+  ion-input {
+    color: #ffffff; /* Texto blanco en los inputs */
+    --background: transparent; /* Fondo transparente para el input para que use el fondo del ion-item */
+    --placeholder-color: #bbbbbb; /* Gris claro para el placeholder */
+  }
+
+  ion-button {
+    margin-top: 1rem;
+    width: 100%;
+    --background: #4caf50; /* Fondo verde para el botón */
+    --color: #ffffff; /* Texto blanco en el botón */
+  }
+
+  .login-link {
+    margin-top: 1rem;
+    color: #4caf50; /* Link en verde */
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .password-error {
+    color: #ff4d4d; /* Color rojo para mensajes de error */
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-align: left; /* Alineación del texto de error */
+  }
+}

@@ -1,71 +1,83 @@
 :host {
-    ion-content {
-      --background: #1e1e1e;
-      color: #ffffff;
-      font-family: 'Arial', sans-serif;
-      padding: 16px; 
-    }
-  
-    ion-header {
-      --background: rgba(255, 255, 255, 0.1); 
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  
-      ion-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #4caf50;
-      }
-  
-      ion-button {
-        --color: #ffffff;
-      }
-    }
-  
-    ion-item {
-      margin-bottom: 16px;
-    }
-  
-    ion-input {
-      color: #ffffff;
-      --padding-start: 16px;
-      --padding-end: 16px;
-    }
-  
-    ion-label {
-      color: #e0e0e0;
-    }
-  
-    ion-select {
-      ion-select-option {
-        color: #ffffff;
-      }
-    }
-  
-    ion-footer {
-      padding: 16px;
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
-  
-      ion-button {
-        width: 100%;
-        --background: #4caf50;
-        --color: #ffffff;
-      }
-    }
-  
- 
-    @media (min-width: 768px) {
-      ion-content {
-        max-width: 600px; 
-        margin: 0 auto;
-      }
-    }
-    .error-message {
-      color: #f53d3d; 
-      font-size: 0.8rem;
-      margin-top: 4px;
-    }
-    
+  ion-content {
+    --background: #1e1e1e; /* Fondo oscuro para ion-content */
+    color: #ffffff; /* Color del texto en blanco */
+    font-family: 'Arial', sans-serif;
+    padding: 16px;
   }
-  
+
+  ion-header {
+    --background: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
+    backdrop-filter: blur(10px); /* Desenfoque de fondo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra más oscura */
+    
+    ion-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4caf50; /* Color verde para el título */
+    }
+
+    ion-button {
+      --color: #ffffff; /* Color del texto del botón en blanco */
+      --background: transparent; /* Fondo transparente para el botón */
+    }
+  }
+
+  ion-item {
+    margin-bottom: 30px;
+    --background: #1e1e1e; /* Fondo oscuro para los ítems */
+    --border-color: transparent; /* Sin borde para el ítem */
+    --padding-start: 16px; /* Relleno interno */
+  }
+
+  ion-label {
+    color: #e0e0e0; /* Color del texto de las etiquetas */
+    font-size: 1rem; /* Tamaño del texto */
+    margin-bottom: 8px; /* Espacio entre la etiqueta y el input */
+  }
+
+  ion-input {
+    color: #ffffff; /* Color del texto del input */
+    --background: #333333; /* Fondo del input en tonos oscuros */
+    --placeholder-color: #888888; /* Color del texto de placeholder en gris claro */
+    --border-radius: 4px; /* Borde redondeado */
+    padding: 12px 16px; /* Relleno interno para el input */
+  }
+
+  ion-select {
+    ion-select-option {
+      color: #ffffff; /* Color del texto de las opciones */
+      --background: #333333; /* Fondo oscuro para las opciones */
+    }
+    --background: #333333; /* Fondo del select */
+  }
+
+  ion-footer {
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5); /* Sombra más oscura para el footer */
+
+    ion-button {
+      width: 100%;
+      --background: #4caf50; /* Fondo verde para el botón */
+      --color: #ffffff; /* Color del texto del botón en blanco */
+    }
+  }
+
+  .error-message {
+    color: #f53d3d; /* Color rojo para el mensaje de error */
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+
+  @media (min-width: 768px) {
+    ion-content {
+      max-width: 600px; /* Ancho máximo en pantallas más grandes */
+      margin: 0 auto; /* Centra el contenido */
+    }
+  }
+
+  .new-background-color {
+    --background: #1e1e1e; /* Fondo oscuro para ion-toolbar */
+  }
+}

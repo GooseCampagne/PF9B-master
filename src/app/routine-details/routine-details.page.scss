@@ -1,53 +1,94 @@
 :host {
+  // Variables SCSS
+  $background-color: #121212;
+  $header-background-color: #1e1e1e;
+  $text-color: rgba(255, 255, 255, 0.8);
+  $icon-color: #e0e0e0;
+  $button-background-color: #333333;
+  $button-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  $primary-color: #4caf50;
+  $danger-color: #f53d3d;
+  $item-background-color: #1e1e1e;
+  $item-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  $no-exercises-color: #bbbbbb;
+
+  // Fondo oscuro global
+  --background-color: #1e1e1e;
+  --text-color: #ffffff;
+  --primary-color: #4caf50;
+  --secondary-color: #e0e0e0;
+  --button-background: #333333;
+  --button-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --card-background: #252525;
+  --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  --delete-color: #f53d3d;
+
+  // Fondo oscuro para todo el contenido
   ion-content {
-    --background: #1e1e1e;
-    color: #ffffff;
+    --background: $background-color;
+    color: $text-color;
     font-family: 'Arial', sans-serif;
   }
 
-  ion-header {
-    --background: rgba(255, 255, 255, 0.1); 
-    backdrop-filter: blur(10px); 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
-    ion-title {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #4caf50;
-    }
-
-    ion-icon {
-      color: #ffffff;
-    }
-
-    ion-button {
-      --color: #ffffff;
-    }
+  // Estilos generales para el header
+  ion-header,
+  ion-toolbar {
+    --background: $header-background-color;
+    color: $text-color;
   }
 
+  // Título del header en tono verde
+  ion-title {
+    color: $primary-color;
+  }
+
+  // Íconos en color gris claro
+  ion-icon {
+    color: $icon-color;
+  }
+
+  // Botones con fondo oscuro y bordes redondeados
+  ion-button {
+    --color: $text-color;
+    --background: $button-background-color;
+    --border-radius: 8px;
+    --box-shadow: $button-shadow;
+  }
+
+  // Estilos para el contenedor principal
   .routine-details-container {
     padding: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: var(--background-color);
+    color: var(--text-color);
 
-    ion-list {
+    // Contenedor para centrar las tarjetas
+    .exercise-card-container {
+      display: flex;
+      flex-direction: column; /* Asegura que las tarjetas se coloquen en columna */
+      align-items: center; /* Centra las tarjetas horizontalmente */
       width: 100%;
-      max-width: 800px; 
-      margin: 0 auto; 
-      padding: 0; 
     }
 
-    .exercise-item {
-      background: rgba(255, 255, 255, 0.1); 
+    // Lista dentro del contenedor
+    ion-list {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    // Estilos para los ítems de la lista
+    ion-item {
+      background: $item-background-color;
       border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: $item-shadow;
       padding: 16px;
-      margin: 20px auto 16px; 
-      color: #ffffff;
+      margin: 16px 0;
+      color: $text-color;
       transition: transform 0.2s ease-in-out;
-      width: 100%; 
-      max-width: 600px;
       position: relative;
       box-sizing: border-box;
 
@@ -55,52 +96,157 @@
         transform: scale(1.02);
       }
 
+      // Estilos para el contenido de los ítems
       ion-label {
         h2 {
           font-size: 1.2rem;
           font-weight: bold;
-          color: #ffffff;
+          color: $text-color;
           margin-bottom: 8px;
         }
 
         p {
           font-size: 1rem;
-          color: #e0e0e0;
+          color: var(--secondary-color);
           margin: 0;
         }
       }
 
+      // Botones dentro de los ítems
       ion-buttons {
         position: absolute;
-        top: 16px; 
-        right: 16px; 
+        top: 16px;
+        right: 16px;
         display: flex;
         flex-direction: row;
-        gap: 8px; 
+        gap: 8px;
         z-index: 1;
+      }
+
+      ion-button {
+        --background: $button-background-color;
+        --color: $text-color;
+        --border-radius: 8px;
+        --box-shadow: $button-shadow;
+      }
+
+      ion-icon {
+        color: var(--secondary-color);
       }
     }
 
+    // Mensaje de "No exercises found."
     .no-exercises {
       font-size: 1rem;
-      color: #cccccc;
+      color: $no-exercises-color;
       text-align: center;
       margin-top: 2rem;
     }
+
+    // Estilos para las tarjetas de ejercicios
+    .exercise-card {
+      width: 100%;
+      max-width: 800px;
+      background: var(--card-background);
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      padding: 16px;
+      margin: 16px 0;
+      color: var(--text-color);
+      transition: transform 0.2s ease-in-out;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+
+      .exercise-content {
+        h2 {
+          font-size: 1.2rem;
+          font-weight: bold;
+          margin-bottom: 8px;
+        }
+
+        p {
+          font-size: 1rem;
+          color: var(--secondary-color);
+          margin: 0;
+        }
+      }
+
+      .exercise-actions {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+
+        button {
+          background: var(--button-background);
+          border: none;
+          border-radius: 8px;
+          padding: 8px;
+          color: var(--text-color);
+          box-shadow: var(--button-shadow);
+          cursor: pointer;
+          transition: background 0.3s;
+
+          ion-icon {
+            color: var(--text-color);
+          }
+
+          &.delete-button {
+            background: var(--delete-color);
+          }
+
+          &:hover {
+            background: var(--primary-color);
+          }
+        }
+      }
+    }
+
+    // Centro de tarjetas
+    .exercise-card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
   }
 
+  // Estilo para el botón de terminar rutina
+  .end-routine-button-container {
+    margin: 16px;
+    text-align: center;
 
+    .end-routine-button {
+      width: 100%;
+      background: var(--delete-color);
+      border: none;
+      border-radius: 8px;
+      padding: 16px;
+      color: var(--text-color);
+      box-shadow: var(--button-shadow);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .end-routine-button:hover {
+      background: var(--primary-color);
+    }
+  }
+
+  // Estilos responsivos para pantallas grandes
   @media (min-width: 768px) {
-    ion-header {
-      --background: rgba(255, 255, 255, 0.1);
-      ion-title {
-        font-size: 2rem;
-      }
+    ion-title {
+      font-size: 2rem;
     }
 
     .routine-details-container {
       ion-list {
-        max-width: 700px; 
+        max-width: 700px;
       }
 
       .no-exercises {
@@ -108,29 +254,8 @@
       }
     }
   }
-  ion-button {
-    --padding-start: 0;
-    --padding-end: 0;
-    --padding-top: 0;
-    --padding-bottom: 0;
+
+  .new-background-color {
+    --background: #1e1e1e;
   }
-  
-  ion-icon {
-    font-size: 24px; 
-  }
-  .routine-details-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .end-routine-button-container {
-    margin: 16px;
-    text-align: center;
-  }
-  
-  .end-routine-button-container ion-button {
-    width: 100%;
-  }
-  
 }

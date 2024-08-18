@@ -1,13 +1,21 @@
 :host {
   ion-content {
-    --background: #1e1e1e;
-    color: rgba(255, 255, 255, 0.1);
+    --background: #121212; /* Fondo oscuro para ion-content */
+    color: rgba(255, 255, 255, 0.8); /* Texto blanco con opacidad */
     font-family: 'Arial', sans-serif;
   }
 
   ion-header {
-    --background: #121212;
-    color: #ffffff; 
+    --background: #1e1e1e; /* Fondo oscuro para el header */
+    color: #ffffff; /* Texto blanco para el header */
+  }
+
+  ion-toolbar {
+    --background: #1e1e1e; /* Fondo oscuro para la barra de herramientas del header */
+  }
+
+  ion-title {
+    color: #4caf50; /* Tono verde para el título en el header */
   }
 
   .home-container {
@@ -18,17 +26,17 @@
   .goal-title {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #4caf50;
+    color: #4caf50; /* Tono verde para el título */
     margin-bottom: 1rem;
   }
 
   ion-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(34, 34, 34, 0.8); /* Fondo oscuro con transparencia */
     border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada */
     transition: transform 0.2s ease-in-out;
     margin-bottom: 16px;
-    color: #ffffff;
+    color: #ffffff; /* Texto blanco para el contenido del card */
 
     &:hover {
       transform: scale(1.02);
@@ -42,40 +50,40 @@
   ion-card-title {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #ffffff;
+    color: #ffffff; /* Blanco para el título del card */
   }
 
   ion-card-subtitle {
     font-size: 0.9rem;
-    color: #cccccc;
+    color: #bbbbbb; /* Gris claro para el subtítulo del card */
   }
 
   ion-card-content {
     font-size: 1rem;
-    color: #e0e0e0;
+    color: #e0e0e0; /* Gris claro para el contenido del card */
     padding-top: 0;
   }
 
   .no-routines {
     font-size: 1rem;
-    color: #cccccc;
+    color: #bbbbbb; /* Gris claro para el mensaje de ausencia de rutinas */
     margin-top: 2rem;
   }
 
   ion-fab-button {
-    --background: #4caf50;
-    --color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --background: #4caf50; /* Fondo verde para el botón flotante */
+    --color: #ffffff; /* Texto blanco para el botón flotante */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada */
   }
 
   ion-avatar {
     --size: 40px;
   }
 
-  ion-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #4caf50;
+  ion-buttons {
+    ion-button {
+      --color: #ffffff; /* Texto blanco para botones en ion-buttons */
+    }
   }
 
   @media (min-width: 768px) {
@@ -90,12 +98,6 @@
 
     .no-routines {
       font-size: 1.2rem;
-    }
-  }
-
-  ion-buttons {
-    ion-button {
-      --color: #ffffff;
     }
   }
 }
