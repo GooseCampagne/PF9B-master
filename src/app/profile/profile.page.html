@@ -6,9 +6,6 @@
       </ion-button>
     </ion-buttons>
     <ion-title>Profile</ion-title>
-    <!-- <ion-buttons slot="end">
-      <ion-toggle (ionChange)="toggleTheme($event)"></ion-toggle>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -20,6 +17,13 @@
         <ion-icon name="camera"></ion-icon>
         <img *ngIf="profileImageUrl" [src]="profileImageUrl" alt="Profile Image" />
       </div>
+      <ion-button
+        expand="full"
+        (click)="captureImage()"
+        class="capture-button"
+      >
+        Use Camera to Take a Photo
+      </ion-button>
     </div>
     <form #profileForm="ngForm" (ngSubmit)="updateProfile()">
       <ion-item>

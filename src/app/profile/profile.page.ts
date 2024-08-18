@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AlertController } from '@ionic/angular';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-profile',
@@ -60,6 +61,48 @@ export class ProfilePage implements OnInit {
     }
   }
 
+  async captureImage() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Camera
+      });
+  
+      const imageUrl = image.dataUrl;
+      if (imageUrl) {
+        // Convertir Data URL a un archivo
+        const file = this.dataURLToFile(imageUrl, 'profile-image.jpg');
+  
+        // Subir la imagen al almacenamiento de Firebase
+        this.firebaseStorageService.uploadFile(file).subscribe(
+          url => {
+            this.profileImageUrl = url;
+          },
+          error => {
+            console.error('Error uploading image', error);
+          }
+        );
+      }
+    } catch (error) {
+      console.error('Error capturing image', error);
+    }
+  }
+// Función para convertir Data URL a un archivo
+dataURLToFile(dataURL: string, filename: string): File {
+  const [header, data] = dataURL.split(',');
+  const mime = header.split(':')[1].split(';')[0];
+  const byteString = atob(data);
+  const arrayBuffer = new ArrayBuffer(byteString.length);
+  const uintArray = new Uint8Array(arrayBuffer);
+
+  for (let i = 0; i < byteString.length; i++) {
+    uintArray[i] = byteString.charCodeAt(i);
+  }
+
+  return new File([arrayBuffer], filename, { type: mime });
+}
   async updateProfile() {
     if (this.isEditing) {
       try {
