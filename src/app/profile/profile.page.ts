@@ -29,17 +29,7 @@ export class ProfilePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.firestoreService.getUserProfile().subscribe(profile => {
-      if (profile) {
-        this.firstName = profile.firstName || '';
-        this.lastName = profile.lastName || '';
-        this.phoneNumber = profile.phoneNumber || '';
-      }
-    });
-
-    this.firebaseStorageService.getUserProfileImageUrl().subscribe(url => {
-      this.profileImageUrl = url;
-    });
+    this.reloadProfile();
   }
 
   triggerFileInput() {
@@ -53,6 +43,7 @@ export class ProfilePage implements OnInit {
       this.firebaseStorageService.uploadFile(input.files[0]).subscribe(
         url => {
           this.profileImageUrl = url;
+          this.reloadProfile(); // Recargar el perfil después de subir la imagen
         },
         error => {
           console.error('Error uploading file', error);
@@ -69,16 +60,17 @@ export class ProfilePage implements OnInit {
         resultType: CameraResultType.DataUrl,
         source: CameraSource.Camera
       });
-  
+
       const imageUrl = image.dataUrl;
       if (imageUrl) {
         // Convertir Data URL a un archivo
         const file = this.dataURLToFile(imageUrl, 'profile-image.jpg');
-  
+
         // Subir la imagen al almacenamiento de Firebase
         this.firebaseStorageService.uploadFile(file).subscribe(
           url => {
             this.profileImageUrl = url;
+            this.reloadProfile(); // Recargar el perfil después de subir la foto
           },
           error => {
             console.error('Error uploading image', error);
@@ -89,26 +81,29 @@ export class ProfilePage implements OnInit {
       console.error('Error capturing image', error);
     }
   }
-// Función para convertir Data URL a un archivo
-dataURLToFile(dataURL: string, filename: string): File {
-  const [header, data] = dataURL.split(',');
-  const mime = header.split(':')[1].split(';')[0];
-  const byteString = atob(data);
-  const arrayBuffer = new ArrayBuffer(byteString.length);
-  const uintArray = new Uint8Array(arrayBuffer);
 
-  for (let i = 0; i < byteString.length; i++) {
-    uintArray[i] = byteString.charCodeAt(i);
+  // Función para convertir Data URL a un archivo
+  dataURLToFile(dataURL: string, filename: string): File {
+    const [header, data] = dataURL.split(',');
+    const mime = header.split(':')[1].split(';')[0];
+    const byteString = atob(data);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const uintArray = new Uint8Array(arrayBuffer);
+
+    for (let i = 0; i < byteString.length; i++) {
+      uintArray[i] = byteString.charCodeAt(i);
+    }
+
+    return new File([arrayBuffer], filename, { type: mime });
   }
 
-  return new File([arrayBuffer], filename, { type: mime });
-}
   async updateProfile() {
     if (this.isEditing) {
       try {
         await this.firestoreService.saveUserProfile(this.firstName, this.lastName, this.phoneNumber);
         await this.showAlert('Success', 'Profile updated successfully');
         this.isEditing = false; // Desactiva el modo de edición después de guardar
+        this.reloadProfile(); // Recargar el perfil
       } catch (error) {
         console.error('Error updating profile', error);
         await this.showAlert('Error', 'Failed to update profile');
@@ -147,5 +142,19 @@ dataURLToFile(dataURL: string, filename: string): File {
 
   goBack() {
     this.location.back();
+  }
+
+  reloadProfile() {
+    this.firestoreService.getUserProfile().subscribe(profile => {
+      if (profile) {
+        this.firstName = profile.firstName || '';
+        this.lastName = profile.lastName || '';
+        this.phoneNumber = profile.phoneNumber || '';
+      }
+    });
+
+    this.firebaseStorageService.getUserProfileImageUrl().subscribe(url => {
+      this.profileImageUrl = url;
+    });
   }
 }
