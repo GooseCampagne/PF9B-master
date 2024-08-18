@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth'; // Importa desde 'c
 import { Observable } from 'rxjs';
 import firebase from 'firebase/compat/app'; // Importa desde 'compat'
 import { switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,11 @@ export class AuthService {
 
   getUser() {
     return this.afAuth.user;
+  }
+
+  get userPhotoURL(): Observable<string> {
+    return this.user$.pipe(
+      map(user => user?.photoURL || '')
+    );
   }
 }

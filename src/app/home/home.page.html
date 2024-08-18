@@ -1,6 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Ex-tracker</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="navigateToProfile()">
+        <ion-avatar>
+          <ion-img [src]="userPhoto$ | async"></ion-img>
+        </ion-avatar>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

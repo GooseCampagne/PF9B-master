@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { RoutineModalPage } from '../routine-modal/routine-modal.page';
 import { Router } from '@angular/router'; // Importa Router aquí
 import { Timestamp } from 'firebase/firestore'; // Importar correctamente
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ import { Timestamp } from 'firebase/firestore'; // Importar correctamente
 export class HomePage implements OnInit {
   routines: any[] = [];
   user: any;
+  userPhoto$: Observable<string> = new Observable<string>();
 
   constructor(
     private modalController: ModalController,
@@ -59,7 +61,6 @@ export class HomePage implements OnInit {
       });
     });
   }
-  
 
   openRoutineDetails(routine: any) {
     console.log('Routine ID:', routine.id);
@@ -68,5 +69,9 @@ export class HomePage implements OnInit {
     } else {
       console.error('Routine ID is missing');
     }
+  }
+
+  navigateToProfile() {
+    this.router.navigate(['/profile']);
   }
 }
