@@ -12,7 +12,10 @@
   <div class="form-container">
     <ion-item>
       <ion-label position="floating">Nombre de la Rutina</ion-label>
-      <ion-input [(ngModel)]="routine.name"></ion-input>
+      <ion-input [(ngModel)]="routine.name" #name="ngModel" required></ion-input>
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+        Nombre de la rutina es requerido.
+      </div>
     </ion-item>
 
     <ion-list>
@@ -25,19 +28,28 @@
           <ion-card-content>
             <ion-item>
               <ion-label position="floating">Nombre</ion-label>
-              <ion-input [(ngModel)]="exercise.name"></ion-input>
+              <ion-input [(ngModel)]="exercise.name" #exerciseName="ngModel" required></ion-input>
+              <div *ngIf="exerciseName.invalid && (exerciseName.dirty || exerciseName.touched)" class="error-message">
+                Nombre es requerido.
+              </div>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Descripción</ion-label>
-              <ion-input [(ngModel)]="exercise.description"></ion-input>
+              <ion-input [(ngModel)]="exercise.description" #exerciseDescription="ngModel" required></ion-input>
+              <div *ngIf="exerciseDescription.invalid && (exerciseDescription.dirty || exerciseDescription.touched)" class="error-message">
+                Descripción es requerida.
+              </div>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Duración (min)</ion-label>
-              <ion-input type="number" [(ngModel)]="exercise.duration"></ion-input>
+              <ion-input type="number" [(ngModel)]="exercise.duration" #exerciseDuration="ngModel" required></ion-input>
+              <div *ngIf="exerciseDuration.invalid && (exerciseDuration.dirty || exerciseDuration.touched)" class="error-message">
+                Duración es requerida.
+              </div>
             </ion-item>
             <ion-item>
               <ion-label>Días de la semana</ion-label>
-              <ion-select [(ngModel)]="exercise.daysOfWeek" multiple="true">
+              <ion-select [(ngModel)]="exercise.daysOfWeek" multiple="true" #exerciseDaysOfWeek="ngModel" required>
                 <ion-select-option value="Lunes">Lunes</ion-select-option>
                 <ion-select-option value="Martes">Martes</ion-select-option>
                 <ion-select-option value="Miércoles">Miércoles</ion-select-option>
@@ -46,10 +58,16 @@
                 <ion-select-option value="Sábado">Sábado</ion-select-option>
                 <ion-select-option value="Domingo">Domingo</ion-select-option>
               </ion-select>
+              <div *ngIf="exerciseDaysOfWeek.invalid && (exerciseDaysOfWeek.dirty || exerciseDaysOfWeek.touched)" class="error-message">
+                Al menos un día debe ser seleccionado.
+              </div>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Tiempo de descanso (min)</ion-label>
-              <ion-input type="number" [(ngModel)]="exercise.restTime"></ion-input>
+              <ion-input type="number" [(ngModel)]="exercise.restTime" #exerciseRestTime="ngModel" required></ion-input>
+              <div *ngIf="exerciseRestTime.invalid && (exerciseRestTime.dirty || exerciseRestTime.touched)" class="error-message">
+                Tiempo de descanso es requerido.
+              </div>
             </ion-item>
           </ion-card-content>
         </ion-card>

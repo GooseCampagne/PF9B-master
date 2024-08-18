@@ -9,6 +9,7 @@ import { from, } from 'rxjs';
   providedIn: 'root'
 })
 export class RoutineService {
+  updateRoutine: any;
   getRoutineDetails(userId: string, routineId: string): Observable<any> {
     return this.firestore.collection('users').doc(userId)
       .collection('routines').doc(routineId)

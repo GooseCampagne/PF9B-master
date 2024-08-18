@@ -10,23 +10,39 @@
 <ion-content>
   <ion-item>
     <ion-label position="floating">Name</ion-label>
-    <ion-input [(ngModel)]="updatedExercise.name"></ion-input>
+    <ion-input [(ngModel)]="updatedExercise.name" #name="ngModel" required></ion-input>
+    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+      Name is required.
+    </div>
   </ion-item>
+
   <ion-item>
     <ion-label position="floating">Description</ion-label>
-    <ion-input [(ngModel)]="updatedExercise.description"></ion-input>
+    <ion-input [(ngModel)]="updatedExercise.description" #description="ngModel" required></ion-input>
+    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error-message">
+      Description is required.
+    </div>
   </ion-item>
+
   <ion-item>
     <ion-label position="floating">Duration (minutes)</ion-label>
-    <ion-input type="number" [(ngModel)]="updatedExercise.duration"></ion-input>
+    <ion-input type="number" [(ngModel)]="updatedExercise.duration" #duration="ngModel" required></ion-input>
+    <div *ngIf="duration.invalid && (duration.dirty || duration.touched)" class="error-message">
+      Duration is required.
+    </div>
   </ion-item>
+
   <ion-item>
     <ion-label position="floating">Rest Time (minutes)</ion-label>
-    <ion-input type="number" [(ngModel)]="updatedExercise.restTime"></ion-input>
+    <ion-input type="number" [(ngModel)]="updatedExercise.restTime" #restTime="ngModel" required></ion-input>
+    <div *ngIf="restTime.invalid && (restTime.dirty || restTime.touched)" class="error-message">
+      Rest Time is required.
+    </div>
   </ion-item>
+
   <ion-item>
     <ion-label>Days of the Week</ion-label>
-    <ion-select [(ngModel)]="updatedExercise.daysOfWeek" multiple="true">
+    <ion-select [(ngModel)]="updatedExercise.daysOfWeek" multiple="true" #daysOfWeek="ngModel" required>
       <ion-select-option value="Monday">Monday</ion-select-option>
       <ion-select-option value="Tuesday">Tuesday</ion-select-option>
       <ion-select-option value="Wednesday">Wednesday</ion-select-option>
@@ -35,7 +51,11 @@
       <ion-select-option value="Saturday">Saturday</ion-select-option>
       <ion-select-option value="Sunday">Sunday</ion-select-option>
     </ion-select>
+    <div *ngIf="daysOfWeek.invalid && (daysOfWeek.dirty || daysOfWeek.touched)" class="error-message">
+      At least one day must be selected.
+    </div>
   </ion-item>
+
   <ion-footer>
     <ion-button expand="full" (click)="save()">Save</ion-button>
   </ion-footer>

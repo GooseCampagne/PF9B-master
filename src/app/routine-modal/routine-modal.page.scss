@@ -88,4 +88,10 @@
       max-width: 800px; /* Aumenta el ancho máximo para pantallas grandes */
     }
   }
+  .error-message {
+    color: #f53d3d; /* Rojo para mensajes de error */
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+  
 }

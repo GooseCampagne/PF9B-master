@@ -8,7 +8,8 @@ import { ModalController } from '@ionic/angular';
 })
 export class EditExerciseModalComponent {
   @Input() exercise: any;
-  updatedExercise: any;
+  updatedExercise: any = {};
+  isFormValid: boolean = true;
 
   constructor(private modalController: ModalController) {}
 
@@ -17,10 +18,22 @@ export class EditExerciseModalComponent {
   }
 
   save() {
-    this.modalController.dismiss(this.updatedExercise);
+    this.isFormValid = this.validateForm();
+    if (this.isFormValid) {
+      this.modalController.dismiss(this.updatedExercise);
+    }
   }
 
   close() {
     this.modalController.dismiss();
+  }
+
+  private validateForm(): boolean {
+    // Validate if all fields are filled
+    return this.updatedExercise.name &&
+           this.updatedExercise.description &&
+           this.updatedExercise.duration &&
+           this.updatedExercise.restTime &&
+           this.updatedExercise.daysOfWeek && this.updatedExercise.daysOfWeek.length > 0;
   }
 }
