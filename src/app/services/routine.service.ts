@@ -2,10 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { from, } from 'rxjs';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class RoutineService {
+  getRoutineDetails(userId: string, routineId: string): Observable<any> {
+    return this.firestore.collection('users').doc(userId)
+      .collection('routines').doc(routineId)
+      .valueChanges(); // Devuelve un Observable
+  }
   constructor(private firestore: AngularFirestore) {}
 
   addRoutine(routine: any): Promise<void> {
@@ -43,15 +51,16 @@ export class RoutineService {
     return this.firestore.collection('users').doc(userId).collection('routines').valueChanges();
   }
 
-  updateRoutine(userId: string, routineId: string, updatedRoutine: any): Promise<void> {
-    if (!userId || !routineId) throw new Error('userId and routineId are required'); // Verifica que ambos parámetros estén presentes
-    return this.firestore.collection('users').doc(userId).collection('routines').doc(routineId).update(updatedRoutine);
+  deleteRoutine(userId: string, routineId: string): Promise<void> {
+    return this.firestore.collection('users').doc(userId)
+      .collection('routines').doc(routineId).delete();
   }
 
-  deleteRoutine(userId: string, routineId: string): Promise<void> {
-    if (!userId || !routineId) throw new Error('userId and routineId are required'); // Verifica que ambos parámetros estén presentes
-    return this.firestore.collection('users').doc(userId).collection('routines').doc(routineId).delete();
+  updateRoutineName(userId: string, routineId: string, newName: string): Promise<void> {
+    return this.firestore.collection('users').doc(userId)
+      .collection('routines').doc(routineId).update({ name: newName });
   }
+  
   getRoutineExercises(userId: string, routineId: string): Observable<any[]> {
     if (!userId || !routineId) {
       throw new Error('userId and routineId are required');
@@ -79,23 +88,24 @@ export class RoutineService {
   }
 
   // Método para actualizar un ejercicio
-updateExercise(userId: string, routineId: string, exerciseId: string, updatedExercise: any): Promise<void> {
-  if (!userId || !routineId || !exerciseId) {
-    throw new Error('userId, routineId, and exerciseId are required');
-  }
-  return this.firestore.collection('users').doc(userId)
-    .collection('routines').doc(routineId)
-    .collection('exercises').doc(exerciseId).update(updatedExercise);
+// src/app/services/routine.service.ts
+
+deleteExercise(userId: string, routineId: string, exerciseId: string): Observable<void> {
+  return from(
+    this.firestore.collection('users').doc(userId)
+      .collection('routines').doc(routineId)
+      .collection('exercises').doc(exerciseId)
+      .delete()
+  );
 }
 
-// Método para eliminar un ejercicio
-deleteExercise(userId: string, routineId: string, exerciseId: string): Promise<void> {
-  if (!userId || !routineId || !exerciseId) {
-    throw new Error('userId, routineId, and exerciseId are required');
-  }
-  return this.firestore.collection('users').doc(userId)
-    .collection('routines').doc(routineId)
-    .collection('exercises').doc(exerciseId).delete();
+updateExercise(userId: string, routineId: string, exerciseId: string, updatedExercise: any): Observable<void> {
+  return from(
+    this.firestore.collection('users').doc(userId)
+      .collection('routines').doc(routineId)
+      .collection('exercises').doc(exerciseId)
+      .update(updatedExercise)
+  );
 }
 
 }
