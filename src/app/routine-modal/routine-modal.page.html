@@ -1,8 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Crear Rutina</ion-title>
+    <ion-title>{{ routine.id ? 'Editar Rutina' : 'Crear Rutina' }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">Cancelar</ion-button>
+      <ion-button *ngIf="routine.id" color="danger" (click)="deleteRoutine()">Eliminar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

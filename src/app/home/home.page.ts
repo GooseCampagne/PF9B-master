@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { RoutineService } from '../services/routine.service';
 import { AuthService } from '../services/auth.service';
 import { RoutineModalPage } from '../routine-modal/routine-modal.page';
+import { Timestamp } from 'firebase/firestore'; // Importar correctamente
 
 @Component({
   selector: 'app-home',
@@ -41,14 +42,22 @@ export class HomePage implements OnInit {
 
   loadRoutines() {
     this.routineService.getRoutines(this.user.uid).subscribe(routines => {
-      this.routines = routines;
+      this.routines = routines.map(routine => {
+        let creationDate = routine.creationDate;
+        if (creationDate instanceof Timestamp) {
+          creationDate = creationDate.toDate();
+        } else if (typeof creationDate === 'object' && creationDate.hasOwnProperty('seconds')) {
+          creationDate = new Date(creationDate.seconds * 1000);
+        }
+        return {
+          ...routine,
+          creationDate
+        };
+      });
     });
   }
 
-  // Implementa el método openRoutineDetails
   openRoutineDetails(routine: any) {
-    // Aquí puedes implementar la lógica para abrir los detalles de la rutina.
-    // Puede ser un modal o redirigir a otra página.
     console.log('Detalles de la rutina:', routine);
   }
 }

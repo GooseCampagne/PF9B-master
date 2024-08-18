@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { RoutineService } from '../services/routine.service';
-import { Exercise } from '../models/exercise.model'; // Asegúrate de que la ruta sea correcta
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-routine-modal',
@@ -9,37 +9,51 @@ import { Exercise } from '../models/exercise.model'; // Asegúrate de que la rut
   styleUrls: ['./routine-modal.page.scss'],
 })
 export class RoutineModalPage {
-  routine = {
-    name: '',
-    exercises: [] as Exercise[], // Utiliza la interfaz Exercise
-    creationDate: new Date(),
-    totalDuration: 0,
-    userId: ''
-  };
+  @Input() userId: string = ''; // Inicializa con un valor predeterminado (vacío en este caso)
+  routine: any = {}; // Asegúrate de definir cómo es el objeto routine
 
   constructor(
     private modalController: ModalController,
-    private routineService: RoutineService
+    private routineService: RoutineService,
+    private authService: AuthService
   ) {}
 
-  addExercise() {
-    this.routine.exercises.push({
-      name: '',
-      description: '',
-      duration: 0,
-      daysOfWeek: [],
-      restTime: 0
-    });
+  async saveRoutine() {
+    if (this.userId) {
+      this.routine.userId = this.userId; // Asegúrate de agregar userId al objeto routine
+      try {
+        await this.routineService.addRoutine(this.routine);
+        this.modalController.dismiss();
+      } catch (error) {
+        console.error('Error al guardar la rutina', error);
+      }
+    } else {
+      console.error('userId is required');
+    }
+  }
+
+  async deleteRoutine() {
+    if (this.routine.id && this.userId) {
+      try {
+        await this.routineService.deleteRoutine(this.userId, this.routine.id);
+        this.modalController.dismiss();
+      } catch (error) {
+        console.error('Error al eliminar la rutina', error);
+      }
+    }
   }
 
   removeExercise(index: number) {
-    this.routine.exercises.splice(index, 1);
+    if (this.routine.exercises) {
+      this.routine.exercises.splice(index, 1);
+    }
   }
 
-  async saveRoutine() {
-    this.routine.totalDuration = this.routine.exercises.reduce((sum, exercise) => sum + exercise.duration, 0);
-    await this.routineService.addRoutine(this.routine);
-    this.modalController.dismiss();
+  addExercise() {
+    if (!this.routine.exercises) {
+      this.routine.exercises = [];
+    }
+    this.routine.exercises.push({ name: '', duration: 0, description: '' });
   }
 
   dismiss() {
