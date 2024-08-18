@@ -1,25 +1,27 @@
+/* home.page.scss */
+
 .home-container {
-  padding: 16px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #121212; /* Fondo oscuro */
+  color: #ffffff; /* Texto blanco */
 }
 
 .goal-title {
-  margin: 20px 0;
-  font-size: 24px;
-  font-weight: bold;
+  color: #ffffff;
 }
 
 ion-card {
-  margin: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #1e1e1e; /* Fondo de tarjeta oscuro */
+  color: #ffffff; /* Texto blanco */
 }
 
-ion-card-title {
-  font-size: 18px;
-  font-weight: bold;
+ion-card-header {
+  border-bottom: 1px solid #333; /* Línea de separación */
 }
 
-ion-card-content {
-  font-size: 14px;
-  color: #666;
+.no-routines {
+  color: #ffffff;
 }

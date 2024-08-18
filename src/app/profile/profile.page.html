@@ -1,6 +1,14 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-toggle (ionChange)="toggleTheme($event)"></ion-toggle>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -28,5 +36,6 @@
       </ion-item>
       <ion-button expand="block" type="submit" [disabled]="!profileForm.valid">Save</ion-button>
     </form>
+    <ion-button expand="block" color="danger" (click)="logout()">Logout</ion-button> <!-- Botón de deslogueo -->
   </div>
 </ion-content>

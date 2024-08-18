@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth'; // Importa desde 'compat'
 import { Observable } from 'rxjs';
 import firebase from 'firebase/compat/app'; // Importa desde 'compat'
-import { switchMap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -35,11 +34,23 @@ export class AuthService {
 
   async signOut() {
     try {
-      return await this.afAuth.signOut();
+      await this.afAuth.signOut();
     } catch (error) {
       console.error('Error signing out', error);
       throw error; // Re-lanzar el error para manejarlo en el componente
     }
+  }
+
+  // Método para cerrar sesión
+  logout(): Observable<void> {
+    return new Observable(observer => {
+      this.signOut().then(() => {
+        observer.next();
+        observer.complete();
+      }).catch(error => {
+        observer.error(error);
+      });
+    });
   }
 
   getUser() {

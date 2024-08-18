@@ -29,7 +29,7 @@
           <ion-card (click)="openRoutineDetails(routine)">
             <ion-card-header>
               <ion-card-title>{{ routine.name }}</ion-card-title>
-              <ion-card-subtitle>Creado el: {{ routine.creationDate | date }}</ion-card-subtitle>
+              <ion-card-subtitle>Creado el: {{ routine.createdAt | date }}</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
               Duración total: {{ routine.totalDuration }} minutos

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseFirestoreService } from '../services/firebase-firestore.service';
 import { FirebaseStorageService } from '../services/firebase-storage.service';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common'; // Importa Location para la navegación hacia atrás
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +18,10 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private firestoreService: FirebaseFirestoreService,
-    private firebaseStorageService: FirebaseStorageService
+    private firebaseStorageService: FirebaseStorageService,
+    private authService: AuthService,
+    private router: Router,
+    private location: Location // Inyecta Location en el constructor
   ) {}
 
   ngOnInit() {
@@ -59,5 +65,24 @@ export class ProfilePage implements OnInit {
       .catch(error => {
         console.error('Error updating profile', error);
       });
+  }
+
+  logout() {
+    this.authService.signOut()
+      .then(() => {
+        this.router.navigate(['/login']); // Redirige al inicio de sesión después de cerrar sesión
+      })
+      .catch(error => {
+        console.error('Error signing out', error);
+      });
+  }
+
+  toggleTheme(event: any) {
+    const isDarkMode = event.detail.checked;
+    document.body.classList.toggle('dark', isDarkMode);
+  }
+
+  goBack() {
+    this.location.back(); // Navega hacia atrás en el historial
   }
 }

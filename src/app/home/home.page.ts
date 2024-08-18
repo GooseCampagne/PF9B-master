@@ -4,9 +4,9 @@ import { RoutineService } from '../services/routine.service';
 import { AuthService } from '../services/auth.service';
 import { RoutineModalPage } from '../routine-modal/routine-modal.page';
 import { Router } from '@angular/router'; // Importa Router aquí
-import { Timestamp } from 'firebase/firestore'; // Importar correctamente
+import { Timestamp } from 'firebase/firestore'; // Importar Timestamp correctamente
 import { Observable } from 'rxjs';
-
+import { of } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 export class HomePage implements OnInit {
   routines: any[] = [];
   user: any;
-  userPhoto$: Observable<string> = new Observable<string>();
+  userPhoto$: Observable<string> = of(''); // Usa Observable<string> para la URL de la foto
 
   constructor(
     private modalController: ModalController,
@@ -29,6 +29,7 @@ export class HomePage implements OnInit {
       this.user = user;
       if (this.user) {
         this.loadRoutines();
+        this.userPhoto$ = this.authService.userPhotoURL; // Asigna el Observable de la URL de la foto
       }
     });
   }
