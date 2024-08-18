@@ -24,19 +24,53 @@
     <form #profileForm="ngForm" (ngSubmit)="updateProfile()">
       <ion-item>
         <ion-label position="floating">First Name</ion-label>
-        <ion-input type="text" [(ngModel)]="firstName" name="firstName" required></ion-input>
+        <ion-input 
+          type="text" 
+          [(ngModel)]="firstName" 
+          name="firstName" 
+          [readonly]="!isEditing" 
+          required
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Last Name</ion-label>
-        <ion-input type="text" [(ngModel)]="lastName" name="lastName" required></ion-input>
+        <ion-input 
+          type="text" 
+          [(ngModel)]="lastName" 
+          name="lastName" 
+          [readonly]="!isEditing" 
+          required
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Phone Number</ion-label>
-        <ion-input type="tel" [(ngModel)]="phoneNumber" name="phoneNumber" required></ion-input>
+        <ion-input 
+          type="tel" 
+          [(ngModel)]="phoneNumber" 
+          name="phoneNumber" 
+          [readonly]="!isEditing" 
+          minlength="10" 
+          maxlength="10" 
+          pattern="[0-9]{10}" 
+          required
+        ></ion-input>
       </ion-item>
-      <ion-button expand="block" type="submit" [disabled]="!profileForm.valid">Save</ion-button>
-      <ion-button expand="block" color="danger" (click)="logout()">Logout</ion-button>
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        [disabled]="!profileForm.valid || !isEditing"
+      >Save</ion-button>
+      <ion-button 
+        expand="block" 
+        color="primary" 
+        (click)="editProfile()"
+        *ngIf="!isEditing"
+      >Edit</ion-button>
+      <ion-button 
+        expand="block" 
+        color="danger" 
+        (click)="logout()"
+      >Logout</ion-button>
     </form>
-     <!-- Botón de deslogueo -->
   </div>
 </ion-content>

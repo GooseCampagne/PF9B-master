@@ -3,7 +3,8 @@ import { FirebaseFirestoreService } from '../services/firebase-firestore.service
 import { FirebaseStorageService } from '../services/firebase-storage.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common'; // Importa Location para la navegación hacia atrás
+import { Location } from '@angular/common';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -15,13 +16,15 @@ export class ProfilePage implements OnInit {
   lastName: string = '';
   phoneNumber: string = '';
   profileImageUrl: string = '';
+  isEditing: boolean = false; // Estado de edición
 
   constructor(
     private firestoreService: FirebaseFirestoreService,
     private firebaseStorageService: FirebaseStorageService,
     private authService: AuthService,
     private router: Router,
-    private location: Location // Inyecta Location en el constructor
+    private location: Location,
+    private alertController: AlertController // Asegúrate de que esto esté importado
   ) {}
 
   ngOnInit() {
@@ -48,7 +51,7 @@ export class ProfilePage implements OnInit {
     if (input.files && input.files[0]) {
       this.firebaseStorageService.uploadFile(input.files[0]).subscribe(
         url => {
-          this.profileImageUrl = url; // Actualiza la URL de la imagen en el perfil
+          this.profileImageUrl = url;
         },
         error => {
           console.error('Error uploading file', error);
@@ -57,20 +60,37 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  updateProfile() {
-    this.firestoreService.saveUserProfile(this.firstName, this.lastName, this.phoneNumber)
-      .then(() => {
-        console.log('Profile updated successfully');
-      })
-      .catch(error => {
+  async updateProfile() {
+    if (this.isEditing) {
+      try {
+        await this.firestoreService.saveUserProfile(this.firstName, this.lastName, this.phoneNumber);
+        await this.showAlert('Success', 'Profile updated successfully');
+        this.isEditing = false; // Desactiva el modo de edición después de guardar
+      } catch (error) {
         console.error('Error updating profile', error);
-      });
+        await this.showAlert('Error', 'Failed to update profile');
+      }
+    }
+  }
+
+  editProfile() {
+    this.isEditing = true; // Activa el modo de edición
+  }
+
+  async showAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
   logout() {
     this.authService.signOut()
       .then(() => {
-        this.router.navigate(['/login']); // Redirige al inicio de sesión después de cerrar sesión
+        this.router.navigate(['/login']);
       })
       .catch(error => {
         console.error('Error signing out', error);
@@ -83,6 +103,6 @@ export class ProfilePage implements OnInit {
   }
 
   goBack() {
-    this.location.back(); // Navega hacia atrás en el historial
+    this.location.back();
   }
 }
