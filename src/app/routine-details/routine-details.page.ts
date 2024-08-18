@@ -5,7 +5,7 @@ import { RoutineService } from '../services/routine.service';
 import { Observable, of, switchMap } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { EditExerciseModalComponent } from '../edit-exercise-modal/edit-exercise-modal.component';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-routine-details',
   templateUrl: './routine-details.page.html',
@@ -22,7 +22,8 @@ export class RoutineDetailsPage implements OnInit {
     private router: Router, // Añadido Router
     private authService: AuthService,
     private routineService: RoutineService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -114,7 +115,7 @@ export class RoutineDetailsPage implements OnInit {
         ).subscribe(
           () => {
             console.log('Exercise updated');
-            this.ngOnInit(); // Refresca la lista de ejercicios
+            this.exercises$ = this.routineService.getRoutineExercises(this.userId, this.routineId); // Recargar ejercicios
           },
           error => {
             console.error('Error updating exercise:', error);
@@ -125,7 +126,6 @@ export class RoutineDetailsPage implements OnInit {
   
     return await modal.present();
   }
-
   // Método para actualizar el nombre de la rutina
   async updateRoutineName() {
     const newName = prompt('Enter new routine name:', this.routineName);
@@ -191,5 +191,9 @@ export class RoutineDetailsPage implements OnInit {
         console.error('Error deleting routine:', error);
       }
     );
+    
+  }
+  goBack() {
+    this.location.back(); // Navega hacia atrás en el historial
   }
 }
