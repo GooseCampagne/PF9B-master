@@ -1,55 +1,65 @@
 :host {
-    ion-content {
-      --background: #1e1e1e;
-    }
-  
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      padding: 16px;
-    }
-  
-    .login-box {
-      width: 100%;
-      max-width: 400px;
-      padding: 32px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      text-align: center;
-    }
-  
-    .login-title {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #ffffff;
-    }
-  
-    ion-input {
-      color: #ffffff;
-    }
-  
-    ion-button {
-      margin-top: 1rem;
-      width: 100%;
-      --background: #4caf50;
-    }
-  
-    .register-link {
-      margin-top: 1rem;
-      color: #4caf50;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  
-    .error-message {
-      color: #ff4d4d;
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      text-align: left;
-    }
+  ion-content {
+    --background: #1e1e1e; 
+    color: #ffffff; 
+    font-family: 'Arial', sans-serif;
   }
-  
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 16px;
+  }
+
+  .login-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 32px;
+    border-radius: 12px;
+    background: rgba(34, 34, 34, 0.8);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    color: #e0e0e0;
+  }
+
+  .login-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #e0e0e0; 
+  }
+
+  ion-input {
+    color: #e0e0e0; 
+    --background: #1e1e1e;
+    --placeholder-color: #bbbbbb; 
+  }
+
+  ion-button {
+    margin-top: 1rem;
+    width: 100%;
+    --background: #4caf50; 
+    --color: #ffffff;
+  }
+
+  .register-link {
+    margin-top: 1rem;
+    color: #4caf50; /* Link en verde */
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .error-message {
+    color: #ff4d4d;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  ion-header {
+    --background: #1e1e1e; 
+    --color: #ffffff;
+  }
+}

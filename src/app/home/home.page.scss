@@ -1,8 +1,13 @@
 :host {
   ion-content {
     --background: #1e1e1e;
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.1);
     font-family: 'Arial', sans-serif;
+  }
+
+  ion-header {
+    --background: #121212;
+    color: #ffffff; 
   }
 
   .home-container {
@@ -88,9 +93,9 @@
     }
   }
 
-ion-buttons {
-  ion-button {
-    --color: #ffffff; 
+  ion-buttons {
+    ion-button {
+      --color: #ffffff;
+    }
   }
-}
 }
