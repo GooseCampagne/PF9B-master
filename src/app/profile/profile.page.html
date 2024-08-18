@@ -35,7 +35,8 @@
         <ion-input type="tel" [(ngModel)]="phoneNumber" name="phoneNumber" required></ion-input>
       </ion-item>
       <ion-button expand="block" type="submit" [disabled]="!profileForm.valid">Save</ion-button>
+      <ion-button expand="block" color="danger" (click)="logout()">Logout</ion-button>
     </form>
-    <ion-button expand="block" color="danger" (click)="logout()">Logout</ion-button> <!-- Botón de deslogueo -->
+     <!-- Botón de deslogueo -->
   </div>
 </ion-content>
