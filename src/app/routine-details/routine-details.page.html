@@ -13,9 +13,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="routine-details-container">
   <ion-list *ngIf="(exercises$ | async) as exercises; else noExercises">
-    <ion-item *ngFor="let exercise of exercises">
+    <ion-item *ngFor="let exercise of exercises" class="exercise-item" lines="full">
       <ion-label>
         <h2>{{ exercise.name }}</h2>
         <p>{{ exercise.description }}</p>
@@ -28,6 +28,6 @@
     </ion-item>
   </ion-list>
   <ng-template #noExercises>
-    <ion-item>No exercises found.</ion-item>
+    <ion-item class="no-exercises" lines="none">No exercises found.</ion-item>
   </ng-template>
 </ion-content>
