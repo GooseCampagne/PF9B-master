@@ -7,8 +7,12 @@
     </ion-buttons>
     <ion-title>{{ routineName }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="updateRoutineName()">Edit Name</ion-button>
-      <ion-button color="danger" (click)="deleteRoutine()">Delete Routine</ion-button>
+      <ion-button (click)="updateRoutineName()">
+        <ion-icon name="pencil" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" (click)="deleteRoutine()">
+        <ion-icon name="trash" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -20,11 +24,15 @@
         <h2>{{ exercise.name }}</h2>
         <p>{{ exercise.description }}</p>
         <p>Duration: {{ exercise.duration }} minutes</p>
-        <p>{{ exercise.daysOfWeek}}</p>
+        <p>{{ exercise.daysOfWeek }}</p>
       </ion-label>
       <ion-buttons slot="end">
-        <ion-button (click)="openEditExerciseModal(exercise.id)">Edit</ion-button>
-        <ion-button color="danger" (click)="deleteExercise(exercise.id)">Delete</ion-button>
+        <ion-button (click)="openEditExerciseModal(exercise.id)">
+          <ion-icon name="pencil" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="deleteExercise(exercise.id)">
+          <ion-icon name="trash" slot="icon-only"></ion-icon>
+        </ion-button>
       </ion-buttons>
     </ion-item>
   </ion-list>
