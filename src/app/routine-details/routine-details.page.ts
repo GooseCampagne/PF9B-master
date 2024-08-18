@@ -194,7 +194,29 @@ export class RoutineDetailsPage implements OnInit {
     return await modal.present();
   }
 
-  deleteRoutine() {
+  async deleteRoutine() {
+    const alert = await this.alertController.create({
+      header: 'Confirmar Eliminación',
+      message: '¿Estás seguro de que deseas eliminar esta rutina? Esta acción no se puede deshacer.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        },
+        {
+          text: 'Eliminar',
+          handler: () => {
+            this.performDeleteRoutine();
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+  
+  performDeleteRoutine() {
     this.authService.user$.pipe(
       switchMap(user => {
         if (user && this.routineId) {
@@ -207,13 +229,14 @@ export class RoutineDetailsPage implements OnInit {
     ).subscribe(
       () => {
         console.log('Routine deleted');
-        this.router.navigate(['/home']); 
+        this.router.navigate(['/home']);
       },
       error => {
         console.error('Error deleting routine:', error);
       }
     );
   }
+  
 
   goBack() {
     this.location.back(); 

@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-item>
-    <ion-label position="floating">Name</ion-label>
+    <ion-label position="floating">Nombre</ion-label>
     <ion-input [(ngModel)]="updatedExercise.name" #name="ngModel" required></ion-input>
     <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
       Name is required.
@@ -17,7 +17,7 @@
   </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Description</ion-label>
+    <ion-label position="floating">Descripción</ion-label>
     <ion-input [(ngModel)]="updatedExercise.description" #description="ngModel" required></ion-input>
     <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error-message">
       Description is required.
@@ -25,7 +25,7 @@
   </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Duration (minutes)</ion-label>
+    <ion-label position="floating">Duración (minutos)</ion-label>
     <ion-input type="number" [(ngModel)]="updatedExercise.duration" #duration="ngModel" required></ion-input>
     <div *ngIf="duration.invalid && (duration.dirty || duration.touched)" class="error-message">
       Duration is required.
@@ -33,7 +33,7 @@
   </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Rest Time (minutes)</ion-label>
+    <ion-label position="floating">Descanso (minutos)</ion-label>
     <ion-input type="number" [(ngModel)]="updatedExercise.restTime" #restTime="ngModel" required></ion-input>
     <div *ngIf="restTime.invalid && (restTime.dirty || restTime.touched)" class="error-message">
       Rest Time is required.
@@ -41,15 +41,15 @@
   </ion-item>
 
   <ion-item>
-    <ion-label>Days of the Week</ion-label>
+    <ion-label>Días de la semana</ion-label>
     <ion-select [(ngModel)]="updatedExercise.daysOfWeek" multiple="true" #daysOfWeek="ngModel" required>
-      <ion-select-option value="Monday">Monday</ion-select-option>
-      <ion-select-option value="Tuesday">Tuesday</ion-select-option>
-      <ion-select-option value="Wednesday">Wednesday</ion-select-option>
-      <ion-select-option value="Thursday">Thursday</ion-select-option>
-      <ion-select-option value="Friday">Friday</ion-select-option>
-      <ion-select-option value="Saturday">Saturday</ion-select-option>
-      <ion-select-option value="Sunday">Sunday</ion-select-option>
+      <ion-select-option value="Monday">Lunes</ion-select-option>
+      <ion-select-option value="Tuesday">Martes</ion-select-option>
+      <ion-select-option value="Wednesday">Miercoles</ion-select-option>
+      <ion-select-option value="Thursday">Jueves</ion-select-option>
+      <ion-select-option value="Friday">Viernes</ion-select-option>
+      <ion-select-option value="Saturday">Sabado</ion-select-option>
+      <ion-select-option value="Sunday">Domingo</ion-select-option>
     </ion-select>
     <div *ngIf="daysOfWeek.invalid && (daysOfWeek.dirty || daysOfWeek.touched)" class="error-message">
       At least one day must be selected.
@@ -57,6 +57,6 @@
   </ion-item>
 
   <ion-footer>
-    <ion-button expand="full" (click)="save()">Save</ion-button>
+    <ion-button expand="full" (click)="save()">Guardar</ion-button>
   </ion-footer>
 </ion-content>
