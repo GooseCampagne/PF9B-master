@@ -1,0 +1,7 @@
+{
+  "name": "PF9B",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

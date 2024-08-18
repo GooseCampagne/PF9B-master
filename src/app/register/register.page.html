@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="register(form)" #form="ngForm">
+    <ion-item>
+      <ion-input [(ngModel)]="email" name="email" type="email" placeholder="Email" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="password" name="password" type="password" placeholder="Password" required></ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit">Register</ion-button>
+  </form>
+</ion-content>

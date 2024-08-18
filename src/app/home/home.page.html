@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home-container">
+    <ion-title class="goal-title">¿Cuál es tu meta?</ion-title>
+
+    <!-- Botón para crear una nueva rutina -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="openRoutineModal()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <!-- Mostrar rutinas guardadas -->
+    <ion-grid *ngIf="routines.length > 0">
+      <ion-row>
+        <ion-col size="12" *ngFor="let routine of routines">
+          <ion-card (click)="openRoutineDetails(routine)">
+            <ion-card-header>
+              <ion-card-title>{{ routine.name }}</ion-card-title>
+              <ion-card-subtitle>Creado el: {{ routine.creationDate | date }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              Duración total: {{ routine.totalDuration }} minutos
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Mensaje si no hay rutinas -->
+    <div *ngIf="routines.length === 0" class="no-routines">
+      No tienes ninguna rutina creada. ¡Comienza agregando una!
+    </div>
+  </div>
+</ion-content>

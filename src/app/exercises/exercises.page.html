@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ejercicios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="exercises-container">
+    <ion-title class="goal-title">Selecciona tus ejercicios para {{ goal }}</ion-title>
+    <ion-list>
+      <!-- Ejemplo de ejercicios, puedes agregar más según sea necesario -->
+      <ion-item *ngFor="let exercise of exercises">
+        <ion-label>{{ exercise }}</ion-label>
+        <ion-checkbox slot="end"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
