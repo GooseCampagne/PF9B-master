@@ -63,8 +63,10 @@ export class RoutineService {
           console.log('Snapshot actions:', actions);
           return actions.map(action => {
             const data = action.payload.doc.data() as any;
+            const id = action.payload.doc.id; // Obtén el ID del documento
             console.log('Document data:', data);
             return {
+              id: id, // Incluye el ID en el objeto devuelto
               daysOfWeek: data.daysOfWeek || [],
               description: data.description || '',
               duration: data.duration || 0,
@@ -75,6 +77,27 @@ export class RoutineService {
         })
       );
   }
+
+  // Método para actualizar un ejercicio
+updateExercise(userId: string, routineId: string, exerciseId: string, updatedExercise: any): Promise<void> {
+  if (!userId || !routineId || !exerciseId) {
+    throw new Error('userId, routineId, and exerciseId are required');
+  }
+  return this.firestore.collection('users').doc(userId)
+    .collection('routines').doc(routineId)
+    .collection('exercises').doc(exerciseId).update(updatedExercise);
+}
+
+// Método para eliminar un ejercicio
+deleteExercise(userId: string, routineId: string, exerciseId: string): Promise<void> {
+  if (!userId || !routineId || !exerciseId) {
+    throw new Error('userId, routineId, and exerciseId are required');
+  }
+  return this.firestore.collection('users').doc(userId)
+    .collection('routines').doc(routineId)
+    .collection('exercises').doc(exerciseId).delete();
+}
+
 }
   
   
