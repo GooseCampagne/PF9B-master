@@ -1,0 +1,55 @@
+:host {
+    ion-content {
+      --background: #1e1e1e;
+    }
+  
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 16px;
+    }
+  
+    .register-box {
+      width: 100%;
+      max-width: 400px;
+      padding: 32px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+  
+    .register-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+  
+    ion-input {
+      color: #ffffff;
+    }
+  
+    ion-button {
+      margin-top: 1rem;
+      width: 100%;
+      --background: #4caf50;
+    }
+  
+    .login-link {
+      margin-top: 1rem;
+      color: #4caf50;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  
+    .password-error {
+      color: #ff4d4d;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+  

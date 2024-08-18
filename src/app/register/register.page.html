@@ -1,17 +1,34 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <form (ngSubmit)="register(form)" #form="ngForm">
-    <ion-item>
-      <ion-input [(ngModel)]="email" name="email" type="email" placeholder="Email" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input [(ngModel)]="password" name="password" type="password" placeholder="Password" required></ion-input>
-    </ion-item>
-    <ion-button expand="full" type="submit">Register</ion-button>
-  </form>
+  <div class="container">
+    <div class="register-box">
+      <div class="register-title">REGISTER</div>
+      <form (ngSubmit)="register(form)" #form="ngForm">
+        <ion-item>
+          <ion-input
+            [(ngModel)]="email"
+            name="email"
+            type="email"
+            placeholder="Email"
+            required
+            pattern="^[a-zA-Z0-9._%+-]+@(gmail|outlook|hotmail|yahoo|live)\.com$"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            [(ngModel)]="password"
+            name="password"
+            type="password"
+            placeholder="Password"
+            required
+            minlength="6"
+          ></ion-input>
+        </ion-item>
+        <div *ngIf="password && password.length < 6" class="password-error">
+          Introduce una contraseña de al menos 6 caracteres
+        </div>
+        <ion-button expand="full" type="submit" [disabled]="!form.valid">Register</ion-button>
+      </form>
+      <div class="login-link" (click)="navigateToLogin()">¿Ya tienes cuenta? Inicia sesión</div>
+    </div>
+  </div>
 </ion-content>

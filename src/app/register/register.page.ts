@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router'; // Importa Router
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,20 +12,24 @@ export class RegisterPage {
   email: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {} // Inyecta Router
+  constructor(private authService: AuthService, private router: Router) {}
 
   async register(form: NgForm) {
-    if (this.email && this.password) {
+    if (form.valid) {
       try {
         await this.authService.signUp(this.email, this.password);
         console.log('Registration successful');
-        form.reset(); // Limpia el formulario
-        this.router.navigate(['/login']); // Redirige a la página de inicio de sesión
+        form.reset(); 
+        this.router.navigate(['/login']); 
       } catch (error) {
         console.error('Error registering', error);
       }
     } else {
-      console.error('Email and password are required');
+      console.error('Please enter a valid email and password');
     }
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['/login']);
   }
 }
