@@ -1,0 +1,65 @@
+:host {
+    ion-content {
+      --background: #1e1e1e;
+      color: #ffffff;
+      font-family: 'Arial', sans-serif;
+      padding: 16px; /* Añade padding al contenido del modal */
+    }
+  
+    ion-header {
+      --background: rgba(255, 255, 255, 0.1); /* Fondo translúcido */
+      backdrop-filter: blur(10px); /* Efecto de desenfoque */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+      ion-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #4caf50;
+      }
+  
+      ion-button {
+        --color: #ffffff;
+      }
+    }
+  
+    ion-item {
+      margin-bottom: 16px;
+    }
+  
+    ion-input {
+      color: #ffffff;
+      --padding-start: 16px; /* Añade espacio dentro del input */
+      --padding-end: 16px;
+    }
+  
+    ion-label {
+      color: #e0e0e0;
+    }
+  
+    ion-select {
+      ion-select-option {
+        color: #ffffff;
+      }
+    }
+  
+    ion-footer {
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.1); /* Fondo translúcido */
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+  
+      ion-button {
+        width: 100%;
+        --background: #4caf50;
+        --color: #ffffff;
+      }
+    }
+  
+    /* Responsive Design */
+    @media (min-width: 768px) {
+      ion-content {
+        max-width: 600px; /* Establece un ancho máximo para pantallas grandes */
+        margin: 0 auto; /* Centra el contenido */
+      }
+    }
+  }
+  
