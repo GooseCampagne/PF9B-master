@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { RoutineService } from '../services/routine.service';
 import { AuthService } from '../services/auth.service';
 import { RoutineModalPage } from '../routine-modal/routine-modal.page';
+import { Router } from '@angular/router'; // Importa Router aquí
 import { Timestamp } from 'firebase/firestore'; // Importar correctamente
 
 @Component({
@@ -17,7 +18,8 @@ export class HomePage implements OnInit {
   constructor(
     private modalController: ModalController,
     private routineService: RoutineService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router // Inyecta Router aquí
   ) {}
 
   ngOnInit() {
@@ -49,6 +51,7 @@ export class HomePage implements OnInit {
         } else if (typeof creationDate === 'object' && creationDate.hasOwnProperty('seconds')) {
           creationDate = new Date(creationDate.seconds * 1000);
         }
+        console.log('Routine loaded:', routine); // Verifica los datos aquí
         return {
           ...routine,
           creationDate
@@ -56,8 +59,14 @@ export class HomePage implements OnInit {
       });
     });
   }
+  
 
   openRoutineDetails(routine: any) {
-    console.log('Detalles de la rutina:', routine);
+    console.log('Routine ID:', routine.id);
+    if (routine.id) {
+      this.router.navigate([`/routine-details/${routine.id}`]);
+    } else {
+      console.error('Routine ID is missing');
+    }
   }
 }

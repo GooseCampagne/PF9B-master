@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Routine Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Usa el async pipe para suscribirse al observable -->
+  <ion-list *ngIf="(exercises$ | async) as exercises; else noExercises">
+    <ion-item *ngFor="let exercise of exercises">
+      <ion-label>
+        <h2>{{ exercise.name }}</h2>
+        <p>{{ exercise.description }}</p>
+        <p>Duration: {{ exercise.duration }} minutes</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ng-template #noExercises>
+    <ion-item>No exercises found.</ion-item>
+  </ng-template>
+</ion-content>

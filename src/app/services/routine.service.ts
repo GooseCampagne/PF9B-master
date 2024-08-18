@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,10 +11,33 @@ export class RoutineService {
   addRoutine(routine: any): Promise<void> {
     const userId = routine.userId;
     if (!userId) throw new Error('userId is required'); // Verifica que userId esté presente
-    return this.firestore.collection('users').doc(userId).collection('routines').add(routine)
-      .then(() => {});
-  }
 
+    // Eliminar userId del objeto de rutina para evitar guardarlo en el campo de datos
+    const { userId: _, exercises, ...routineData } = routine;
+
+    // Añadir un campo de fecha de creación
+    routineData.createdAt = new Date();
+
+    // Añadir la rutina y obtener el ID del documento creado
+    return this.firestore.collection('users').doc(userId).collection('routines').add(routineData)
+      .then(docRef => {
+        // Añadir ejercicios si existen
+        if (exercises && exercises.length > 0) {
+          const batch = this.firestore.firestore.batch();
+          exercises.forEach((exercise: any) => {
+            const exerciseRef = docRef.collection('exercises').doc(); // Crear un nuevo documento para cada ejercicio
+            batch.set(exerciseRef, exercise);
+          });
+          return batch.commit().then(() => {
+            // Una vez creado el documento, actualízalo con el ID generado
+            return docRef.update({ id: docRef.id });
+          });
+        } else {
+          // Si no hay ejercicios, solo actualiza el documento con el ID generado
+          return docRef.update({ id: docRef.id });
+        }
+      });
+  }
   getRoutines(userId: string): Observable<any[]> {
     if (!userId) throw new Error('userId is required'); // Verifica que userId esté presente
     return this.firestore.collection('users').doc(userId).collection('routines').valueChanges();
@@ -29,4 +52,30 @@ export class RoutineService {
     if (!userId || !routineId) throw new Error('userId and routineId are required'); // Verifica que ambos parámetros estén presentes
     return this.firestore.collection('users').doc(userId).collection('routines').doc(routineId).delete();
   }
+  getRoutineExercises(userId: string, routineId: string): Observable<any[]> {
+    if (!userId || !routineId) {
+      throw new Error('userId and routineId are required');
+    }
+    return this.firestore.collection('users').doc(userId)
+      .collection('routines').doc(routineId)
+      .collection('exercises').snapshotChanges().pipe(
+        map((actions: DocumentChangeAction<any>[]) => {
+          console.log('Snapshot actions:', actions);
+          return actions.map(action => {
+            const data = action.payload.doc.data() as any;
+            console.log('Document data:', data);
+            return {
+              daysOfWeek: data.daysOfWeek || [],
+              description: data.description || '',
+              duration: data.duration || 0,
+              name: data.name || '',
+              restTime: data.restTime || 0
+            };
+          });
+        })
+      );
+  }
 }
+  
+  
+

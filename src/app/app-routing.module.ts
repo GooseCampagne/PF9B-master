@@ -32,9 +32,12 @@ const routes: Routes = [
   },
   {
     path: 'routine-modal',
-    loadChildren: () => import('./routine-modal/routine-modal.module').then( m => m.RoutineModalPageModule)
+    loadChildren: () => import('./routine-modal/routine-modal.module').then(m => m.RoutineModalPageModule)
   },
-
+  {
+    path: 'routine-details/:id', // Define la ruta con un parámetro 'id'
+    loadChildren: () => import('./routine-details/routine-details.module').then(m => m.RoutineDetailsPageModule)
+  }
 ];
 
 @NgModule({
