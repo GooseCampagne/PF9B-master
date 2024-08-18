@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { RoutineService } from '../services/routine.service';
 import { Observable, of, switchMap } from 'rxjs';
+import { ModalController } from '@ionic/angular';
+import { EditExerciseModalComponent } from '../edit-exercise-modal/edit-exercise-modal.component';
 
 @Component({
   selector: 'app-routine-details',
@@ -16,7 +18,8 @@ export class RoutineDetailsPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
-    private routineService: RoutineService
+    private routineService: RoutineService,
+    private modalController: ModalController
   ) {}
 
   ngOnInit() {
@@ -85,31 +88,36 @@ export class RoutineDetailsPage implements OnInit {
     );
   }
   // Método para actualizar un ejercicio
-  editExercise(exercise: any) {
-    // Ejemplo de actualización: añade 10 minutos a la duración
-    const updatedExercise = {
-      ...exercise,
-      duration: exercise.duration + 10
-    };
+  async editExercise(exercise: any) {
+    const modal = await this.modalController.create({
+      component: EditExerciseModalComponent,
+      componentProps: { exercise }
+    });
 
-    this.authService.user$.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.routineService.updateExercise(user.uid, this.routineId, exercise.id, updatedExercise);
-        } else {
-          console.error('No user found');
-          return of(null);
-        }
-      })
-    ).subscribe(
-      () => {
-        console.log('Exercise updated');
-        // Opcional: Refresca la lista de ejercicios después de la actualización
-        this.ngOnInit();
-      },
-      error => {
-        console.error('Error updating exercise:', error);
+    modal.onDidDismiss().then((result) => {
+      if (result.data) {
+        this.authService.user$.pipe(
+          switchMap(user => {
+            if (user && this.routineId) {
+              return this.routineService.updateExercise(user.uid, this.routineId, exercise.id, result.data);
+            } else {
+              console.error('No user or routine ID found');
+              return of(null);
+            }
+          })
+        ).subscribe(
+          () => {
+            console.log('Exercise updated');
+            // Opcional: Refresca la lista de ejercicios después de la actualización
+            this.ngOnInit();
+          },
+          error => {
+            console.error('Error updating exercise:', error);
+          }
+        );
       }
-    );
+    });
+
+    return await modal.present();
   }
 }

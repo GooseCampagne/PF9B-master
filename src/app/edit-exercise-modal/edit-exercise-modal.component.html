@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Exercise</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Name</ion-label>
+    <ion-input [(ngModel)]="updatedExercise.name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Description</ion-label>
+    <ion-input [(ngModel)]="updatedExercise.description"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Duration (minutes)</ion-label>
+    <ion-input type="number" [(ngModel)]="updatedExercise.duration"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Rest Time (minutes)</ion-label>
+    <ion-input type="number" [(ngModel)]="updatedExercise.restTime"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Days of the Week</ion-label>
+    <ion-select [(ngModel)]="updatedExercise.daysOfWeek" multiple="true">
+      <ion-select-option value="Monday">Monday</ion-select-option>
+      <ion-select-option value="Tuesday">Tuesday</ion-select-option>
+      <ion-select-option value="Wednesday">Wednesday</ion-select-option>
+      <ion-select-option value="Thursday">Thursday</ion-select-option>
+      <ion-select-option value="Friday">Friday</ion-select-option>
+      <ion-select-option value="Saturday">Saturday</ion-select-option>
+      <ion-select-option value="Sunday">Sunday</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-footer>
+    <ion-button expand="full" (click)="save()">Save</ion-button>
+  </ion-footer>
+</ion-content>

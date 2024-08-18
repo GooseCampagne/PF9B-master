@@ -11,9 +11,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { EditExerciseModalComponent } from './edit-exercise-modal/edit-exercise-modal.component';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, EditExerciseModalComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -21,8 +21,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AngularFireModule.initializeApp(environment.firebaseConfig), // Agregado
     AngularFireAuthModule,
     ReactiveFormsModule, 
+    FormsModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
+  
 })
 export class AppModule {}
